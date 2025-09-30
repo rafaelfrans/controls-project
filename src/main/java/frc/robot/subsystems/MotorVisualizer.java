@@ -33,23 +33,21 @@ public class MotorVisualizer extends SubsystemBase {
             blades[i] = root.append(new MechanismLigament2d(
                 "Blade" + i,
                 100,
-                i * 120  // 3 blades, 120° apart
+                i * 120  
             ));
             blades[i].setLineWeight(5);
         };
 
-        //sending visual to the smart dashboard
         SmartDashboard.putData("Motor Visualizer", mechanism);
     }
 
     public void update(double speed) {
-        // Convert motor speed (-1 to 1) into degrees per second
         double degreesPerSecond = speed * 360.0; 
         double deltaAngle = degreesPerSecond * 0.2;
     
         currentAngle += deltaAngle;
     
-        // Wrap angle between 0-360
+
         if (currentAngle >= 360) currentAngle -= 360;
         if (currentAngle < 0) currentAngle += 360;
     
@@ -57,7 +55,7 @@ public class MotorVisualizer extends SubsystemBase {
             double baseAngle = i * 120;
             blades[i].setAngle(baseAngle + currentAngle);
 
-            int strength = (int)(Math.abs(speed) * 255); // 0-255
+            int strength = (int)(Math.abs(speed) * 255); 
             Color8Bit color;
 
             if (speed >= 0) {
